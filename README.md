@@ -1,14 +1,20 @@
-# Project
+# LLMOps Solution Accelerator
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+Welcome to the LLMOps solution accelerator repository! This project is intended to serve as the starting point for LLMOps implementation in Azure.
 
-As the maintainer of this project, please make a few updates:
+## Project Overview
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+**TODO:** Briefly describe what the project is about.
+
+## Prerequisites
+
+**TODO:** Describe what will be need to run this SA (Azure subscription, etc)
+
+## Documentation
+
+1. [Solution Accelerator Concepts and Structure](documentation/concepts_and_structure.md)
+2. **TODO:** Architectural Patterns - Supported LLM solutions patterns
+3. **TODO:** Accelerator Deployment Guides - How to deploy and use the SA
 
 ## Contributing
 
