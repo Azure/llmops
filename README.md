@@ -1,20 +1,26 @@
-# LLMOps Solution Accelerator
+# Azure LLMOps Solution Accelerator
 
-Welcome to the LLMOps solution accelerator repository! This project is intended to serve as the starting point for LLMOps implementation in Azure.
+![Header](media/llmopsheader.png)
 
-## Project Overview
+Welcome to the LLMOps Solution Accelerator! This project offers a ready-to-run LLMOps reference implementation, accompanied by essential concepts aimed at facilitating the adoption of LLMOps practices into your projects.
 
-**TODO:** Briefly describe what the project is about.
+## Highlights
 
-## Prerequisites
-
-**TODO:** Describe what will be need to run this SA (Azure subscription, etc)
+- Bootstrap your project in under an hour
+- Provision resources with Infrastructure as Code
+- Easy-to-configure and extend templates
+- Leverage Azure AI Studio
 
 ## Documentation
 
-1. [Solution Accelerator Concepts and Structure](documentation/concepts_and_structure.md)
-2. **TODO:** Architectural Patterns - Supported LLM solutions patterns
-3. **TODO:** Accelerator Deployment Guides - How to deploy and use the SA
+1. [Reference Architecture](documentation/reference_architecture.md)
+2. [Repository Structure](documentation/repository_structure.md)
+3. [Git Workflow](documentation/git_workflow.md)
+
+## How-to
+
+1. [Bootstrapping a new Project](documentation/bootstrapping.md)
+2. [Delivering a new Feature](documentation/delivering_new_feature.md)
 
 ## Contributing
 
