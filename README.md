@@ -13,9 +13,9 @@ Welcome to the LLMOps Solution Accelerator! This project offers a ready-to-run L
 
 ## Documentation
 
-1. [Reference Architecture](documentation/reference_architecture.md)
-2. [Repository Structure](documentation/repository_structure.md)
-3. [Git Workflow](documentation/git_workflow.md)
+<!-- 1. [Reference Architecture](documentation/reference_architecture.md) -->
+1. [Repo Structure and Project Roles](documentation/repository_structure.md)
+2. [Git Workflow and Pipelines](documentation/git_workflow.md)
 
 ## How-to
 
