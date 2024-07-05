@@ -8,7 +8,6 @@ In this section, you will learn how to start a new project using a project templ
 * [Azure Developer CLI (azd)](https://aka.ms/install-azd) - to manage Azure deployments.
 * [GitHub CLI (gh)](https://cli.github.com/) - to create GitHub repo.
 * [Git](https://git-scm.com/downloads) - to update repository contents.
-* [Python 3.10+](https://www.python.org/downloads/) - to perform automated tasks after provisioning.
 
 You will also need:
 * [Azure Subscription](https://azure.microsoft.com/free/) - sign up for a free account.
