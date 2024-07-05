@@ -4,6 +4,7 @@ In this section, you will learn how to start a new project using a project templ
 
 ## Prerequisites
 
+* [Azure CLI (az)](https://aka.ms/install-az) - to manage Azure resources.
 * [Azure Developer CLI (azd)](https://aka.ms/install-azd) - to manage Azure deployments.
 * [GitHub CLI (gh)](https://cli.github.com/) - to create GitHub repo.
 * [Git](https://git-scm.com/downloads) - to update repository contents.
@@ -66,13 +67,19 @@ You will also need:
 
 3. **Authenticate with Azure and GitHub**
 
-   Log in to Azure:
+   Log in to Azure CLI:
+
+   ```sh
+   az login
+   ```
+
+   Log in to Azure Developer CLI:
 
    ```sh
    azd auth login
    ```
 
-   Log in to GitHub:
+   Log in to GitHub CLI:
 
    ```sh
    gh auth login
