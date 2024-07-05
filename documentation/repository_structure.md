@@ -1,4 +1,4 @@
-# Repository Structure and Roles
+# Repository Structure
 
 This accelerator utilizes project templates as its foundation. Therefore, we've structured our repository system to include a primary repository, which contains comprehensive documentation, and bootstrapping scripts for initiating projects using these templates. To maintain simplicity and promote cohesion within each repository, we allocate a separate repository for each project template. The diagram below illustrates the proposed structure.
 
@@ -26,30 +26,8 @@ The `LLM Project-template` represents repositories serving as templates for LLM 
 - **src**: Source code for the project, including orchestration flows, model definitions, training scripts, and utilities.
 - **tests**: Contains test cases and scripts to ensure the quality and correctness of the codebase.
 
-### Project A
+For an example of a project template, you can refer to this [RAG with Azure AI Studio and Promptflow](https://github.com/azure/llmops-project-template) template.
 
-`Project A` illustrates an example of a project repository that can be instantiated from one of the `LLM Project-template` repositories. It adheres to the same directory structure as the template.
+### Project A (Bootstrapped Project)
 
-## LLM Project Roles
-
-This section outlines the key roles within an LLM project and what each is responsible for.
-
-### AI Engineer
-
-- **Leading Development**: Guides the project's development, making sure everything runs smoothly.
-- **Building the App**: Works on coding and putting together different parts of the application.
-- **Creating Prompts**: Designs the prompts the application uses, ensuring they're effective and meet project needs.
-- **Managing Data**: Organizes, chunk and labels data, sets up custom indexes.
-- **Overseeing Data Flow**: Manages data flow systems for seamless integration.
-- **Production Readiness**: Guarantees the solution is reliable and deployment-ready.
-
-### Data Scientist
-
-- **Improving Search**: Enhances retrieval efficiency and accuracy.
-- **Working on Prompts with AI Engineers**: Helps fine-tune the prompts with AI Engineers.
-- **Tuning the Models**: If needed, adjusts models to improve how they perform and the results they give.
-
-### Infrastructure Team
-
-- **Setting Up Resources**: Manages technical resources for project setup.
-- **Handling Access**: Manages access rights, ensuring security and project accessibility.
+`Project A` represents a project that has been bootstrapped from the template. We're calling it Project A for illustration purposes, but it can be named appropriately for your use case. It will have the same initial directory structure as the template.

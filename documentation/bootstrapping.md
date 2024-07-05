@@ -1,17 +1,23 @@
 # Bootstrapping a New Project
 
-In this section, you will learn how to bootstrap a new project based on a project template.
+In this section, you will learn how to start a new project using a project template. The bootstrapping process will create a new project repository on GitHub and populate it with content from the project template. Additionally, it will set up the development environment for your project, ensuring that you have everything you need to get started quickly and efficiently.
 
 ## Prerequisites
 
-- An Azure Subscription with access to the [Azure OpenAI Service](https://aka.ms/oai/access).
-- Permissions to create a Service Principal (SP) in Azure AD.
-- Permissions to assign the Owner role to the SP within the subscription.
-- A GitHub Account.
+* [Azure Developer CLI (azd)](https://aka.ms/install-azd) - to manage Azure deployments.
+* [Git](https://git-scm.com/downloads) - to manage code repositories.
+* [Python 3.10+](https://www.python.org/downloads/) - to perform automated tasks after provisioning.
+
+You will also need:
+* [Azure Subscription](https://azure.microsoft.com/free/) - sign up for a free account.
+* [GitHub Account](https://github.com/signup) - sign up for a free account.
+* [Access to Azure OpenAI](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access) - submit a form to request access.
+* Permissions to create a Service Principal (SP) in your Azure AD Tenant.
+* Permissions to assign the Owner role to the SP within the subscription.
 
 ## Steps to Bootstrap a Project
 
-1. **Clone the LLMOps Repo**
+1. **Clone the LLMOps Repo (this repository)**
 
    Clone the repository from GitHub:
 
@@ -19,25 +25,41 @@ In this section, you will learn how to bootstrap a new project based on a projec
    git clone https://github.com/azure/llmops
    ```
 
-2. **Fill the `bootstrap.properties` File**
+2. **Define Properties for Bootstrapping**
 
-   Open the `bootstrap.properties` file and add the required properties.
+   Enter the `llmops` directory, rename the `bootstrap.properties.template` file to `bootstrap.properties`, and update it with the following information:
 
-   Below is a brief description of the properties you need to include:
+   - **GitHub Repo Creation** (related to the new repository to be created)
+     - `github_username`: Your GitHub **username**.
+     - `github_use_ssh`: Set to **true** to interact with GitHub repos using [SSH](https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-ssh-urls), **false** to use [HTTPS](https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls).
+     - `github_template_repo`: The project template repository. Ex: *azure/llmops-project-template*.
+     - `github_new_repo`: The bootstrapped project repo to be created. Ex *placerda/my-rag-project*.
+     - `github_new_repo_visibility`: Visibility of the new repository, choose **public**, **private** or **internal**.
 
-   - **GitHub Repo Creation Properties**
-     - `github_username`: Your GitHub username.
-     - `github_use_ssh`: Set to `true` to use SSH, `false` to use HTTPS.
-     - `github_template_repo`: The template repository to clone (ex: "azure/llmops-project-template").
-     - `github_new_repo`: The new repository to create (ex: "placerda/my-llmops-project").
-     - `github_new_repo_visibility`: Visibility of the new repository (`public`, `private`, `internal`).
-     - `github_default_branch`: The default branch name for the new repository.
+        > For private or internal repositories, you must use GitHub Pro, GitHub Team, or GitHub Enterprise. 
 
    - **Dev Environment Provision Properties**
-     - `azd_dev_env_provision`: Set to `true` to provision a development environment.
-     - `azd_dev_env_name`: The name of the development environment (ex: "rag-project-dev").
+     - `azd_dev_env_provision`: Set to **true** to provision a development environment.
+     
+          > If you set it to **false**, you will need to manually create the environment for the project.
+
+     - `azd_dev_env_name`: The name of the development environment. Ex: *rag-project-dev*.
      - `azd_dev_env_subscription`: Your Azure subscription ID.
-     - `azd_dev_env_location`: The Azure region for your dev environment (ex: "eastus").
+     - `azd_dev_env_location`: The Azure region for your dev environment. Ex: *eastus*.
+
+   Here is an example of the `bootstrap.properties` file:
+
+   ```properties
+   github_username="placerda"
+   github_use_ssh="true"
+   github_template_repo="azure/llmops-project-template"
+   github_new_repo="placerda/my-rag-project"
+   github_new_repo_visibility="public"
+   azd_dev_env_provision="true"
+   azd_dev_env_name="rag-project-dev"
+   azd_dev_env_subscription="12345678-1234-1234-1234-123456789098"
+   azd_dev_env_location="eastus"
+   ```
 
 3. **Authenticate with Azure and GitHub**
 
@@ -57,7 +79,7 @@ In this section, you will learn how to bootstrap a new project based on a projec
 
    The bootstrap script is available in two versions: Bash (`bootstrap.sh`) and PowerShell (`bootstrap.ps1`). 
 
-    Run the appropriate script for your environment.
+   Run the appropriate script for your environment.
 
    **For Bash:**
 
@@ -71,7 +93,7 @@ In this section, you will learn how to bootstrap a new project based on a projec
    .\bootstrap.ps1
    ```
 
-   > Note: The script will create and initialize the new repository. It checks if the new repository exists, creates it if it does not, clones the template repository, and mirrors it to the new repository. It also sets the default branch for the new repository. After creating the repository, it will provision the development environment resources if you set `azd_dev_env_provision` to true.
+    At the end of its execution, the script will have created and initialized the new repository and provisioned the development environment resources, provided you set `azd_dev_env_provision` to true. During its execution, the script checks if the new repository exists and creates it if it does not. It then clones the template repository and mirrors it to the new repository. Additionally, it sets the default branch for the new repository.
 
 5. **Create a Service Principal**
 
@@ -81,8 +103,7 @@ In this section, you will learn how to bootstrap a new project based on a projec
    az ad sp create-for-rbac --name "<your-service-principal-name>" --role Owner --scopes /subscriptions/<your-subscription-id> --sdk-auth
    ```
 
-    Please ensure that the output information created here is properly save for future use.
-
+   > Ensure that the output information created here is properly saved for future use.
 
 6. **Set GitHub Environment Variables**
 
@@ -106,13 +127,13 @@ In this section, you will learn how to bootstrap a new project based on a projec
    
    The `AZURE_CREDENTIALS` secret should be formatted as follows:
     
-    ```
-    {
-        "clientId": "your-client-id",
-        "clientSecret": "your-client-secret",
-        "subscriptionId": "your-subscription-id",
-        "tenantId": "your-tenant-id"
-    }
-    ```
+   ```json
+   {
+       "clientId": "your-client-id",
+       "clientSecret": "your-client-secret",
+       "subscriptionId": "your-subscription-id",
+       "tenantId": "your-tenant-id"
+   }
+   ```
 
 That's all! Your new project is now bootstrapped and ready to go.

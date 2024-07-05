@@ -96,7 +96,7 @@ rm -rf $template_project_repo_name.git
 
 # Setting default branch
 echo -e "${YELLOW}Setting default branch in the new repository.${NC}"
-gh repo edit $github_new_repo --default-branch $github_default_branch
+gh repo edit $github_new_repo --default-branch develop
 
 echo -e "${GREEN}New repository created successfully.${NC}"
 

@@ -1,6 +1,7 @@
 ## LLMOps Accelerator
 local/
 bootstrap.properties
+*.Identifier
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

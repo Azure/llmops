@@ -95,7 +95,7 @@ Set-Location "$github_template_repo_name.git"
 Write-Host "Mirroring template repository in the new GitHub repository." -ForegroundColor Cyan
 git push --mirror "$github_new_repo_uri"
 Write-Host "Setting default branch in the new repository." -ForegroundColor Cyan
-gh repo edit $github_new_repo --default-branch $github_default_branch
+gh repo edit $github_new_repo --default-branch develop
 Set-Location ..
 Remove-Item -Recurse -Force "$github_template_repo_name.git"
 

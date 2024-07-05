@@ -1,13 +1,12 @@
 # GitHub Repo Creation Properties
 github_username="<username>"
 # github_use_ssh: true will use ssh, false will use https
-github_use_ssh="<true_or_false>"
+github_use_ssh="true"
 # github repo format: "entity_id/repo-name.git" entity_id is the github username or organization name
 github_template_repo="<username_or_org>/<repo-template-name>"
 github_new_repo="<username_or_org>/<new-repo-name>"
 # project_visibility: public, private, internal
 github_new_repo_visibility="<visibility>" 
-github_default_branch="<default_branch>" 
 
 # Dev Environment Provision Properties
 azd_dev_env_provision="<true_or_false>"

@@ -62,25 +62,13 @@ gh pr create --base main --head release/1.0.0 --title "Release 1.0.0" --body "Me
 
 Once the pull request (PR) to the `main` branch is manually approved, the release branch is merged into the `main` branch. This action triggers the Continuous Delivery (CD) pipeline, which deploys the code to the **prod** environment.
 
-
-7. **Update dev**:
-
-During UAT, fixes and adjustments may be required, which will need to be updated in the `develop` branch. In this case, changes from the `main` branch are merged into the `develop` branch.
-
-```bash
-git checkout develop
-git merge main
-git commit -m "Merge feature X from UAT"
-git push origin develop
-```
-
 ## CI/CD Pipelines
 
 CI/CD (Continuous Integration/Continuous Delivery) pipelines automate integration, evaluation, and deployment, streamlining workflows, reducing errors, and ensuring efficient delivery of high-quality application to production.
 
 ![Pipelines](../media/git_workflow_pipelines.png)
 
-The *Pull Request Evaluation pipeline* runs unit tests and utilize AI-assisted evaluation to validate the changes in the pull request. This step ensures that any new code additions or modifications meet the project's quality standards before being integrated into the main codebase.
+The *Pull Request pipeline* runs unit tests and utilize AI-assisted evaluation to validate the changes in the pull request. This step ensures that any new code additions or modifications meet the project's quality standards before being integrated into the main codebase.
 
 In the *Continuous Integration pipeline*, the process starts with the build flow, where the application is built from the source code. Following this, an AI-assisted evaluation is conducted to analyze the build for potential issues. If the evaluation is successful, the final step is the register flow, which registers the built application and prepares it for deployment.
 
