@@ -5,7 +5,8 @@ In this section, you will learn how to start a new project using a project templ
 ## Prerequisites
 
 * [Azure Developer CLI (azd)](https://aka.ms/install-azd) - to manage Azure deployments.
-* [Git](https://git-scm.com/downloads) - to manage code repositories.
+* [GitHub CLI (gh)](https://cli.github.com/) - to create GitHub repo.
+* [Git](https://git-scm.com/downloads) - to update repository contents.
 * [Python 3.10+](https://www.python.org/downloads/) - to perform automated tasks after provisioning.
 
 You will also need:
@@ -46,6 +47,8 @@ You will also need:
      - `azd_dev_env_name`: The name of the development environment. Ex: *rag-project-dev*.
      - `azd_dev_env_subscription`: Your Azure subscription ID.
      - `azd_dev_env_location`: The Azure region for your dev environment. Ex: *eastus*.
+
+    > The dev environment resources will be created in the selected subscription and region. This decision should consider the quota available for the resources to be created in the region, as well as the fact that some resources have specific features enabled only in certain regions. Therefore, ensure that the resources to be created by the IaaC of your template project have quota and availability in the chosen subscription and region. More information about the resources to be created can be found on the template page, as shown in this example: [LLMOps Project Template Resources](https://github.com/Azure/llmops-project-template/blob/main/README.md#project-resources).
 
    Here is an example of the `bootstrap.properties` file:
 
