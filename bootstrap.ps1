@@ -13,7 +13,7 @@ New-Item -ItemType Directory -Path $tempDir
 Set-Location $tempDir
 
 # Read the variables from the bootstrap.properties file
-$bootstrapFile = "C:\Users\paulo\Downloads\test\bootstrap.properties"
+$bootstrapFile = "..\bootstrap.properties"
 if (Test-Path $bootstrapFile) {
     Get-Content $bootstrapFile | ForEach-Object {
         # Ignore comments and empty lines
