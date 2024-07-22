@@ -99,6 +99,34 @@ gh repo edit $github_new_repo --default-branch develop
 Set-Location ..
 Remove-Item -Recurse -Force "$github_template_repo_name.git"
 
+# develop branch protection rule
+gh api `
+  -method PUT `
+  -H "Accept: application/vnd.github+json" `
+  -H "X-GitHub-Api-Version: 2022-11-28" `
+  /repos/$github_new_repo/branches/develop/protection `
+  -F "required_status_checks[strict]=true" `
+  -F "required_status_checks[contexts][]=evaluate-flow" `
+  -F "enforce_admins=true" `
+  -F "required_pull_request_reviews[dismiss_stale_reviews]=false" `
+  -F "required_pull_request_reviews[require_code_owner_reviews]=false" `
+  -F "required_pull_request_reviews[required_approving_review_count]=0" `
+  -F "required_pull_request_reviews[require_last_push_approval]=false" `
+  -F "required_linear_history=true" `
+  -F "allow_force_pushes=true" `
+  -F "allow_deletions=true" `
+  -F "block_creations=true" `
+  -F "required_conversation_resolution=true" `
+  -F "lock_branch=false" `
+  -F "allow_fork_syncing=true" `
+  -F "restrictions=null" 
+
+# Create GitHub environment named dev with specified variables
+gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_ENV_NAME -f value="$azd_dev_env_name"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_SUBSCRIPTION_ID -f value="$azd_dev_env_subscription"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZD_LOCATION -f value="$azd_dev_env_location"
+
 Write-Host "`nNew repository set up successfully." -ForegroundColor Green
 
 if ($azd_dev_env_provision -eq "true") {
@@ -130,11 +158,14 @@ if ($azd_dev_env_provision -eq "true") {
         azd env set AZURE_PRINCIPAL_TYPE User
     }
     
-    # 05. Show azd environment variables
+    # 05. Disable App Service provisioning
+    azd env set AZURE_DEPLOY_APP_SERVICE false
+
+    # 06. Show azd environment variables
     Write-Host "`n05. Show azd environment variables.`n" -ForegroundColor Magenta
     azd env get-values
     
-    # 06. Provision dev environment resources
+    # 07. Provision dev environment resources
     Write-Host "`n06. Provision dev environment.`n" -ForegroundColor Magenta
     Write-Host "Running azd provision." -ForegroundColor Cyan
     azd provision
