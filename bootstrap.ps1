@@ -101,7 +101,7 @@ Remove-Item -Recurse -Force "$github_template_repo_name.git"
 
 # develop branch protection rule
 gh api `
-  -method PUT `
+  -X PUT `
   -H "Accept: application/vnd.github+json" `
   -H "X-GitHub-Api-Version: 2022-11-28" `
   /repos/$github_new_repo/branches/develop/protection `
@@ -119,7 +119,7 @@ gh api `
   -F "required_conversation_resolution=true" `
   -F "lock_branch=false" `
   -F "allow_fork_syncing=true" `
-  -F "restrictions=null" 
+  -F "restrictions=null"
 
 # Create GitHub environment named dev with specified variables
 gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev
