@@ -18,17 +18,17 @@ You will also need:
 
 ## Steps to Bootstrap a Project
 
-1. **Clone the LLMOps Repo (this repository)**
+1. **Clone the LLMOps Repo (this repository) into a temporary directory**
 
-   Clone the repository from GitHub:
+   Clone the repository from GitHub into a temporary directory:
 
    ```sh
-   git clone https://github.com/azure/llmops
+   git clone https://github.com/azure/llmops /tmp/llmops
    ```
 
 2. **Define Properties for Bootstrapping**
 
-   Enter the `llmops` directory, rename the `bootstrap.properties.template` file to `bootstrap.properties`, and update it with the following information:
+    Go to the `llmops` directory, create a copy of the `bootstrap.properties.template` file, rename the copy to `bootstrap.properties`, and update it with the following information:
 
    - **GitHub Repo Creation** (related to the new repository to be created)
      - `github_username`: Your GitHub **username**.
@@ -37,7 +37,7 @@ You will also need:
      - `github_new_repo`: The bootstrapped project repo to be created. Ex *placerda/my-rag-project*.
      - `github_new_repo_visibility`: Visibility of the new repository, choose **public**, **private** or **internal**.
 
-        > For private or internal repositories, you must use GitHub Pro, GitHub Team, or GitHub Enterprise. 
+        > For private or internal repositories, you must use GitHub Pro, GitHub Team, or GitHub Enterprise.
 
    - **Dev Environment Provision Properties**
      - `azd_dev_env_provision`: Set to **true** to provision a development environment.
@@ -46,9 +46,9 @@ You will also need:
 
      - `azd_dev_env_name`: The name of the development environment. Ex: *rag-project-dev*.
      - `azd_dev_env_subscription`: Your Azure subscription ID.
-     - `azd_dev_env_location`: The Azure region for your dev environment. Ex: *eastus*.
+     - `azd_dev_env_location`: The Azure region for your dev environment. Ex: *eastus2*.
 
-    > The dev environment resources will be created in the selected subscription and region. This decision should consider the quota available for the resources to be created in the region, as well as the fact that some resources have specific features enabled only in certain regions. Therefore, ensure that the resources to be created by the IaaC of your template project have quota and availability in the chosen subscription and region. More information about the resources to be created can be found on the template page, as shown in this example: [LLMOps Project Template Resources](https://github.com/Azure/llmops-project-template/blob/main/README.md#project-resources).
+    > The dev environment resources will be created in the selected subscription and region. This decision should consider the quota available for the resources to be created in the region, as well as the fact that some resources have specific features enabled only in certain regions. Therefore, ensure that the resources to be created by the IaC of your template project have quota and availability in the chosen subscription and region. More information about the resources to be created can be found on the template page, as shown in this project template example: [LLMOps Project Template Resources](https://github.com/Azure/llmops-project-template/blob/main/README.md#project-resources).
 
    Here is an example of the `bootstrap.properties` file:
 
@@ -61,7 +61,7 @@ You will also need:
    azd_dev_env_provision="true"
    azd_dev_env_name="rag-project-dev"
    azd_dev_env_subscription="12345678-1234-1234-1234-123456789098"
-   azd_dev_env_location="eastus"
+   azd_dev_env_location="eastus2"
    ```
 
 3. **Authenticate with Azure and GitHub**
@@ -144,5 +144,7 @@ You will also need:
        "tenantId": "your-tenant-id"
    }
    ```
+
+   > **Note:** If you are only interested in experimenting with this accelerator, you can use the same subscription, varying only `AZURE_ENV_NAME` for each enviornment.
 
 That's all! Your new project is now bootstrapped and ready to go.

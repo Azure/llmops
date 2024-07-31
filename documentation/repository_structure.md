@@ -1,6 +1,6 @@
 # Repository Structure
 
-This accelerator utilizes project templates as its foundation. Therefore, we've structured our repository system to include a primary repository, which contains comprehensive documentation, and bootstrapping scripts for initiating projects using these templates. To maintain simplicity and promote cohesion within each repository, we allocate a separate repository for each project template. The diagram below illustrates the proposed structure.
+This accelerator utilizes project templates as its foundation. Therefore, the repository system is structured to include a primary repository, which contains comprehensive documentation and bootstrapping scripts for initiating projects using these templates. To maintain simplicity and promote cohesion within each repository, a separate repository is allocated for each project template. Additionally, dependencies between the primary repository and the template repositories are minimized. The diagram below illustrates the proposed structure.
 
 ![Header](../media/git_workflow_repository_structure.png)
 

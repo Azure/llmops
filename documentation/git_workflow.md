@@ -1,6 +1,6 @@
 # Git Workflow and Pipelines
 
-On this page, you will learn about the Git workflow used by this accelerator, including branches and how changes to the code can trigger automation pipelines.This workflow follows the [Git flow](https://nvie.com/posts/a-successful-git-branching-model) methodology, which is a best practice for managing Git with multiple environments like **dev**, **qa**, and **prod**. But you can always choose the workflow that works best for your project.
+On this page, you will learn about the Git workflow used by this accelerator, including branches and how changes to the code can trigger automation pipelines. The workflow follows the [Git flow](https://nvie.com/posts/a-successful-git-branching-model) methodology, which is widely recognized for effectively managing Git with multiple environments like **dev**, **qa**, and **prod**. However, feel free to choose the workflow that best suits your project's needs.
 
 # Git Workflow
 
@@ -36,11 +36,11 @@ gh pr create --base develop --head feature/feature_x --title "[Your Feature Name
 
 3. **Merge to develop**:
 
-Once the Pull Request is approved, it is merged into the `develop` branch. This merge triggers the *Continuous Integration (CI) Pipeline*, which builds the orchestration flow and conducts AI-assisted evaluations using a comprehensive test dataset based on the [Golden Dataset](https://aka.ms/copilot-golden-dataset-guide). Upon successful completion, the *Continuous Delivery (CD) Pipeline* is executed to deploy the flow to the **dev** environment.
+Once the Pull Request is approved, it is merged into the `develop` branch. This merge triggers the *Continuous Integration (CI) Pipeline*, which builds the orchestration flow and conducts AI-assisted evaluations using a comprehensive test dataset based on the [Golden Dataset](https://aka.ms/copilot-golden-dataset-guide). Upon successful completion, the *Continuous Deployment (CD) Pipeline* is executed to deploy the flow to the **dev** environment.
 
 4. **Release Branch (Release/1.0.0)**:
 
-After confirming the stability of the `develop` branch through testing in **dev**, a release branch `release/1.0.0` is created from `develop`. This triggers a *Continuous Delivery (CD) pipeline* to deploy the application to the **qa** environment. Before deployment, an AI-based evaluation assesses quality, risk, and safety metrics to ensure stability. The application in **qa** is then used for User Acceptance Testing (UAT) and [red teaming](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/red-teaming) testing.
+After confirming the stability of the `develop` branch through testing in **dev**, a release branch `release/1.0.0` is created from `develop`. This triggers a *Continuous Deployment (CD) pipeline* to deploy the application to the **qa** environment. Before deployment, an AI-based evaluation assesses [quality](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/develop/flow-evaluate-sdk), risk and [safety](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/develop/simulator-interaction-data) evaluation. The application in **qa** is then used for User Acceptance Testing (UAT) and [red-teaming](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/red-teaming) ou LLM App.
 
 ```bash
 git checkout develop
@@ -60,16 +60,24 @@ gh pr create --base main --head release/1.0.0 --title "Release 1.0.0" --body "Me
 
 6. **Merge to main**:
 
-Once the pull request (PR) to the `main` branch is manually approved, the release branch is merged into the `main` branch. This action triggers the Continuous Delivery (CD) pipeline, which deploys the code to the **prod** environment.
+Once the pull request (PR) to the `main` branch is manually approved, the release branch is merged into the `main` branch. This action triggers the Continuous Deployment (CD) pipeline, which deploys the code to the **prod** environment.
 
 ## CI/CD Pipelines
 
-CI/CD (Continuous Integration/Continuous Delivery) pipelines automate integration, evaluation, and deployment, streamlining workflows, reducing errors, and ensuring efficient delivery of high-quality application to production.
+The CI/CD (Continuous Integration/Continuous Deployment) pipelines automate integration, evaluation, and deployment processes, ensuring efficient delivery of high-quality applications.
 
 ![Pipelines](../media/git_workflow_pipelines.png)
 
-The *Pull Request pipeline* runs unit tests and utilize AI-assisted evaluation to validate the changes in the pull request. This step ensures that any new code additions or modifications meet the project's quality standards before being integrated into the main codebase.
+**The Pull Request Evaluation Pipeline** begins with unit tests, followed by a code review, and concludes with AI-assisted prompt evaluation to validate code changes before integration.
 
-In the *Continuous Integration pipeline*, the process starts with the build flow, where the application is built from the source code. Following this, an AI-assisted evaluation is conducted to analyze the build for potential issues. If the evaluation is successful, the final step is the register flow, which registers the built application and prepares it for deployment.
+**In the Continuous Integration Pipeline**, the process starts with unit tests and code reviews, followed by AI-assisted flow evaluation to identify potential issues. The application is then built, and the flow image is registered for deployment.
 
-The *Continuous Delivery pipeline* has three different configurations one for each environment: **dev**, **qa**, and **prod**. In the *dev* option, necessary resources are set up, the latest code is pulled, and the application is deployed to the **dev** environment for initial testing. The *qa* alternative provisions resources, retrieves the latest code, and performs an AI-assisted evaluation to ensure the application meets quality standards before deployment to the **qa** environment. Finally, the *prod* option deploys the application to the **prod** environment after provisioning resources and updating the code. Smoke tests confirm the application's functionality post-deployment.
+**The Continuous Deployment Pipeline** operates across three environments: dev, qa, and prod. Provisioning of resources is performed when necessary, and the deployment of the application is executed in the respective environment.
+
+- **In the dev environment**, the latest code is pulled, and the application is deployed for the development team's testing.
+
+- **In the qa environment**, the code is retrieved, and AI-assisted evaluations for quality and safety are conducted, followed by integration testing. The application is then deployed and made available for User Acceptance Testing (UAT).
+
+- **In the prod environment**, the same image built in the Continuous Integration Pipeline is deployed, ensuring consistency and reliability. Integration testing is conducted, and smoke testing ensures functionality post-deployment.
+
+This structured approach streamlines workflows, reduces errors, and guarantees the efficient delivery of applications to production.
