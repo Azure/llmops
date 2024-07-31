@@ -124,7 +124,7 @@ gh api \
 gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev
 gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_ENV_NAME -f value="$azd_dev_env_name"
 gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_SUBSCRIPTION_ID -f value="$azd_dev_env_subscription"
-gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZD_LOCATION -f value="$azd_dev_env_location"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_LOCATION -f value="$azd_dev_env_location"
 
 echo -e "${GREEN}New repository created successfully.${NC}"
 
