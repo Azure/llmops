@@ -8,11 +8,18 @@ Follow the steps below to deliver this feature from the beginning of development
 
 ### Start Cloning Your Project
 
-We will use an example project bootstrapped in the **placerda/rag-project** GitHub repository, based on the [llmops-project-template](https://github.com/azure/llmops-project-template). The same process applies to your bootstrapped project repository. For detailed instructions on bootstrapping a project, refer to the [Bootstrapping a New Project](bootstrapping.md) page. Use a command like the one below to clone your bootstrapped project:
+Use a command like the one below to clone your bootstrapped project repository. Make sure to replace the example repository name with the actual repository you created during the bootstrapping process:
 
 ```bash
-git clone git@github.com:placerda/rag-project.git
-cd rag-project
+git clone git@github.com:your-username/your-repository.git
+cd your-repository
+```
+
+If you prefer to clone the repository using HTTPS instead of SSH, you can use the following command:
+
+```bash
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
 ```
 
 ### 1. Creating a Feature Branch
