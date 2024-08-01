@@ -136,8 +136,21 @@ if ($azd_dev_env_provision -eq "true") {
 
     # Clone the new repository
     Write-Host "Cloning the new GitHub repository." -ForegroundColor Cyan
-    git clone "$github_new_repo_uri"
-    Set-Location "$github_new_repo_name"
+    git clone "$github_new_repo_uri2222222"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Failed to clone GitHub Repo." -ForegroundColor Red
+        cd ..
+        exit 1
+    }
+
+    # Verify the repository directory exists before changing location
+    if (Test-Path "$github_new_repo_name") {
+        Set-Location "$github_new_repo_name"
+        Write-Host "Changed directory to $github_new_repo_name." -ForegroundColor Green
+    } else {
+        Write-Host "Error when cloning GitHub. The path '$github_new_repo_name' does not exist." -ForegroundColor Red
+        exit 1
+    }
 
     # Initialize the azd environment
     Write-Host "Running azd init." -ForegroundColor Cyan

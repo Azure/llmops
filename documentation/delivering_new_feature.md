@@ -56,14 +56,14 @@ Upon completing the feature, create a Pull Request (PR) to merge changes from th
 
 ```bash
 git add .
-git commit -m "Feature complete: [Your Feature Description]"
+git commit -m "Feature X complete"
 git push origin feature/feature_x
 ```
 
 **Create the PR:**
 
 ```bash
-gh pr create --base develop --head feature/feature_x --title "[Your Feature Name]" --body "Description of the changes and the impact."
+gh pr create --base develop --head feature/feature_x --title "Feature X" --body "Description of the changes and the impact."
 ```
 
 You can also use the GitHub website to create the pull request. Remember to select `develop` as the base branch and `feature/feature_x` as the compare branch.

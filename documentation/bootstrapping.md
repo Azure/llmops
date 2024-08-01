@@ -23,12 +23,26 @@ You will also need:
    Clone the repository from GitHub into a temporary directory:
 
    ```sh
-   git clone https://github.com/azure/llmops /tmp/llmops
+    mkdir temp
+    cd temp
+    git clone https://github.com/azure/llmops
    ```
 
 2. **Define Properties for Bootstrapping**
 
-    Go to the `llmops` directory, create a copy of the `bootstrap.properties.template` file, rename the copy to `bootstrap.properties`, and update it with the following information:
+    Go to the `llmops` directory.
+
+   ```sh
+    cd llmops
+   ```
+
+   Create a copy of the `bootstrap.properties.template` file with this filename `bootstrap.properties`.
+
+    ```sh
+    cp bootstrap.properties.template bootstrap.properties
+    ```
+
+    Open the `bootstrap.properties` with a text editor and update it with the following information:
 
    - **GitHub Repo Creation** (related to the new repository to be created)
      - `github_username`: Your GitHub **username**.
