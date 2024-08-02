@@ -13,7 +13,7 @@ New-Item -ItemType Directory -Path $tempDir
 Set-Location $tempDir
 
 # Read the variables from the bootstrap.properties file
-$bootstrapFile = "C:\Users\paulo\Downloads\test\bootstrap.properties"
+$bootstrapFile = "..\bootstrap.properties"
 if (Test-Path $bootstrapFile) {
     Get-Content $bootstrapFile | ForEach-Object {
         # Ignore comments and empty lines
@@ -99,8 +99,43 @@ gh repo edit $github_new_repo --default-branch develop
 Set-Location ..
 Remove-Item -Recurse -Force "$github_template_repo_name.git"
 
+<<<<<<< HEAD
 Write-Host "`nNew repository set up successfully." -ForegroundColor Green
 
+=======
+# develop branch protection rule
+gh api `
+  -X PUT `
+  -H "Accept: application/vnd.github+json" `
+  -H "X-GitHub-Api-Version: 2022-11-28" `
+  /repos/$github_new_repo/branches/develop/protection `
+  -F "required_status_checks[strict]=true" `
+  -F "required_status_checks[contexts][]=evaluate-flow" `
+  -F "enforce_admins=true" `
+  -F "required_pull_request_reviews[dismiss_stale_reviews]=false" `
+  -F "required_pull_request_reviews[require_code_owner_reviews]=false" `
+  -F "required_pull_request_reviews[required_approving_review_count]=0" `
+  -F "required_pull_request_reviews[require_last_push_approval]=false" `
+  -F "required_linear_history=true" `
+  -F "allow_force_pushes=true" `
+  -F "allow_deletions=true" `
+  -F "block_creations=true" `
+  -F "required_conversation_resolution=true" `
+  -F "lock_branch=false" `
+  -F "allow_fork_syncing=true" `
+  -F "restrictions=null"
+
+# Create GitHub environment named dev with specified variables
+gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_ENV_NAME -f value="$azd_dev_env_name"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_SUBSCRIPTION_ID -f value="$azd_dev_env_subscription"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_LOCATION -f value="$azd_dev_env_location"
+
+Write-Host "`nNew repository set up successfully." -ForegroundColor Green
+
+Write-Host "`nAccess your new repo in: `nhttps://github.com/$github_new_repo"  -ForegroundColor Green
+
+>>>>>>> origin/main
 if ($azd_dev_env_provision -eq "true") {
 
     # 03. Initializing AZD dev environment
@@ -109,7 +144,24 @@ if ($azd_dev_env_provision -eq "true") {
     # Clone the new repository
     Write-Host "Cloning the new GitHub repository." -ForegroundColor Cyan
     git clone "$github_new_repo_uri"
+<<<<<<< HEAD
     Set-Location "$github_new_repo_name"
+=======
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Failed to clone GitHub Repo." -ForegroundColor Red
+        cd ..
+        exit 1
+    }
+
+    # Verify the repository directory exists before changing location
+    if (Test-Path "$github_new_repo_name") {
+        Set-Location "$github_new_repo_name"
+        Write-Host "Changed directory to $github_new_repo_name." -ForegroundColor Green
+    } else {
+        Write-Host "Error when cloning GitHub. The path '$github_new_repo_name' does not exist." -ForegroundColor Red
+        exit 1
+    }
+>>>>>>> origin/main
 
     # Initialize the azd environment
     Write-Host "Running azd init." -ForegroundColor Cyan
@@ -119,8 +171,31 @@ if ($azd_dev_env_provision -eq "true") {
         exit 1
     }
 
+<<<<<<< HEAD
     # 04. Provision dev environment resources
     Write-Host "`n04. Provision dev environment.`n" -ForegroundColor Magenta
+=======
+    # 04. Check if user logged in to Azure is Service Principal or not
+    $azd_user_type = (az account show --query user.type -o tsv)
+    
+    if ($azd_user_type -eq "servicePrincipal") {
+        Write-Host "User is a Service Principal. Setting AZURE_PRINCIPAL_TYPE to ServicePrincipal." -ForegroundColor Green
+        azd env set AZURE_PRINCIPAL_TYPE ServicePrincipal
+    } else {
+        Write-Host "User is not a Service Principal. Setting AZURE_PRINCIPAL_TYPE to User." -ForegroundColor Green
+        azd env set AZURE_PRINCIPAL_TYPE User
+    }
+    
+    # 05. Disable App Service provisioning
+    azd env set AZURE_DEPLOY_APP_SERVICE false
+
+    # 06. Show azd environment variables
+    Write-Host "`n05. Show azd environment variables.`n" -ForegroundColor Magenta
+    azd env get-values
+    
+    # 07. Provision dev environment resources
+    Write-Host "`n06. Provision dev environment.`n" -ForegroundColor Magenta
+>>>>>>> origin/main
     Write-Host "Running azd provision." -ForegroundColor Cyan
     azd provision
 

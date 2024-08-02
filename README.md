@@ -2,7 +2,7 @@
 
 ![Header](media/llmopsheader.png)
 
-Welcome to the LLMOps Solution Accelerator! This project offers a ready-to-run LLMOps reference implementation, accompanied by essential concepts aimed at facilitating the adoption of LLMOps practices into your projects.
+Welcome to the LLMOps Solution Accelerator! This project provides a ready-to-run LLMOps solution, with a primary focus on CI/CD pipeline implementation. It includes essential concepts designed to help you seamlessly adopt LLMOps practices into your projects.
 
 ## Highlights
 
@@ -11,13 +11,16 @@ Welcome to the LLMOps Solution Accelerator! This project offers a ready-to-run L
 - Easy-to-configure and extend templates
 - Leverage Azure AI Studio
 
+
 ## Documentation
 
-<!-- 1. [Reference Architecture](documentation/reference_architecture.md) -->
-1. [Repository Structure](documentation/repository_structure.md)
-2. [Git Workflow and Pipelines](documentation/git_workflow.md)
-3. [LLM  Project Roles](documentation/project_roles.md)
+Explore this set of articles to navigate and implement the accelerator smoothly. These resources clarify the repository structure, Git workflow, and reference architecture, providing a strong foundation for successful execution.
 
+1. [Repository Structure](documentation/repository_structure.md): Describes how the repository structure is organized.
+2. [Git Workflow and Pipelines](documentation/git_workflow.md): Explains the Git workflow and CI/CD pipelines used in the accelerator.
+3. [Reference Architecture](documentation/reference_architecture.md): Reference architecture that this accelerator is based on.
+1. [RAG Project Template](https://github.com/azure/llmops-project-template): Offers a ready-to-use RAG project template.
+1. [LLM Project Roles](documentation/project_roles.md): Details the various roles in an LLM project and their responsibilities.
 
 ## How-to
 
