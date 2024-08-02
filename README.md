@@ -3,7 +3,7 @@
 ![Header](media/llmopsheader.png)
 
 Welcome to the LLMOps Solution Accelerator! This project provides a ready-to-run LLMOps solution, with a primary focus on CI/CD pipeline implementation. It includes essential concepts designed to help you seamlessly adopt LLMOps practices into your projects.
-
+ 
 ## Highlights
 
 - Bootstrap your project in under an hour
