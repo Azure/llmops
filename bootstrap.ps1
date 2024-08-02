@@ -129,6 +129,8 @@ gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new
 
 Write-Host "`nNew repository set up successfully." -ForegroundColor Green
 
+Write-Host "`nAccess your new repo in: `nhttps://github.com/$github_new_repo"  -ForegroundColor Green
+
 if ($azd_dev_env_provision -eq "true") {
 
     # 03. Initializing AZD dev environment
@@ -136,7 +138,7 @@ if ($azd_dev_env_provision -eq "true") {
 
     # Clone the new repository
     Write-Host "Cloning the new GitHub repository." -ForegroundColor Cyan
-    git clone "$github_new_repo_uri2222222"
+    git clone "$github_new_repo_uri"
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Failed to clone GitHub Repo." -ForegroundColor Red
         cd ..

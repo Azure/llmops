@@ -128,6 +128,8 @@ gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new
 
 echo -e "${GREEN}New repository created successfully.${NC}"
 
+echo -e "${GREEN}Access your new repo in: \nhttps://github.com/$github_new_repo ${NC}"
+
 if [ "$azd_dev_env_provision" = "true" ]; then
 
     # 03. Initializing AZD dev environment

@@ -161,4 +161,10 @@ You will also need:
 
    > **Note:** If you are only interested in experimenting with this accelerator, you can use the same subscription, varying only `AZURE_ENV_NAME` for each enviornment.
 
+7. **Enable GitHub Actions**
+
+   Ensure that GitHub Actions are enabled in your repository, as in some cases, organizational policies may not have this feature enabled by default. To do this, simply click the button indicated in the figure below:
+
+   ![Enable Actions](../media/enable_github_actions.png)
+
 That's all! Your new project is now bootstrapped and ready to go.
