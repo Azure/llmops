@@ -125,6 +125,21 @@ gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$github_new_
 gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_ENV_NAME -f value="$azd_dev_env_name"
 gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_SUBSCRIPTION_ID -f value="$azd_dev_env_subscription"
 gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/dev/variables -f name=AZURE_LOCATION -f value="$azd_dev_env_location"
+gh secret set AZURE_CREDENTIALS --repo $github_new_repo --env dev --body "replace_with_dev_sp_credencials"
+
+# Create placeholders for GitHub environment qa variables
+gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/qa
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/qa/variables -f name=AZURE_ENV_NAME -f value="replace_with_qa_env_name"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/qa/variables -f name=AZURE_SUBSCRIPTION_ID -f value="replace_with_qa_subscription_id"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/qa/variables -f name=AZURE_LOCATION -f value="replace_with_qa_location"
+gh secret set AZURE_CREDENTIALS --repo $github_new_repo --env qa --body "replace_with_qa_sp_credencials"
+
+# Create placeholders for GitHub environment prod variables
+gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/prod
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/prod/variables -f name=AZURE_ENV_NAME -f value="replace_with_prod_env_name"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/prod/variables -f name=AZURE_SUBSCRIPTION_ID -f value="replace_with_prod_subscription_id"
+gh api --method POST -H "Accept: application/vnd.github+json" /repos/$github_new_repo/environments/prod/variables -f name=AZURE_LOCATION -f value="replace_with_prod_location"
+gh secret set AZURE_CREDENTIALS --repo $github_new_repo --env prod --body "replace_with_prod_sp_credencials"
 
 echo -e "${GREEN}New repository created successfully.${NC}"
 
