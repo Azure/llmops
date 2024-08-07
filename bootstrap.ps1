@@ -104,6 +104,7 @@ if ($LASTEXITCODE -ne 0) {
         Write-Host "ERROR: Permission denied to GitHub repo. github_use_ssh is false, you are using HTTPS. Please look at this reference:"
         Write-Host "https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-ssh-urls"
     }
+    cd ..
     exit 1
 }
 
