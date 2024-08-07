@@ -105,6 +105,7 @@ if ($LASTEXITCODE -ne 0) {
         Write-Host "https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-ssh-urls"
     }
     cd ..
+    cd ..    
     exit 1
 }
 
