@@ -93,7 +93,20 @@ Write-Host "Cloning template repository." -ForegroundColor Cyan
 git clone --bare "$github_template_repo_uri"
 Set-Location "$github_template_repo_name.git"
 Write-Host "Mirroring template repository in the new GitHub repository." -ForegroundColor Cyan
+
+# Mirror-push to the new repository
 git push --mirror "$github_new_repo_uri"
+if ($LASTEXITCODE -ne 0) {
+    if ($github_use_ssh -eq $true) {
+        Write-Host "ERROR: Permission denied to GitHub repo. github_use_ssh is true. Please look at this reference:"
+        Write-Host "https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls"
+    } else {
+        Write-Host "ERROR: Permission denied to GitHub repo. github_use_ssh is false, you are using HTTPS. Please look at this reference:"
+        Write-Host "https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-ssh-urls"
+    }
+    exit 1
+}
+
 Write-Host "Setting default branch in the new repository." -ForegroundColor Cyan
 gh repo edit $github_new_repo --default-branch develop
 Set-Location ..

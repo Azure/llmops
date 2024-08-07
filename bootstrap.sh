@@ -91,6 +91,17 @@ cd $github_template_repo_name.git
 
 # Mirror-push to the new repository
 git push --mirror "$github_new_repo_uri"
+if [[ $? -ne 0 ]]; then
+  if [[ "$github_use_ssh" == "true" ]]; then
+    echo "ERROR: Permission denied to GitHub repo. github_use_ssh is true. Please look at this reference:"
+    echo "https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls"
+  else
+    echo "ERROR: Permission denied to GitHub repo. github_use_ssh is false, you are using HTTPS. Please look at this reference:"
+    echo "https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-ssh-urls"    
+  fi
+  exit 1
+fi
+
 cd ..
 rm -rf $template_project_repo_name.git
 
